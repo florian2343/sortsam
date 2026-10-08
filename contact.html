@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact – Sortsam</title><link rel="stylesheet" href="style.css"><link rel="icon" href="icon.png"></head>
+<body><main>
+<a class="lang" href="kontakt.html">Deutsch</a>
+<header><img src="icon.png" alt=""><a href="en.html">Sortsam</a></header>
+<nav><a href="en.html">Home</a><a href="privacy.html">Privacy</a><a href="help.html">Help &amp; contact</a><a href="impressum.html">Imprint (DE)</a></nav>
+
+<h1>Contact</h1>
+<section>
+<p>Questions, bugs, ideas? Write to us here, or by email to <a href="mailto:sortsam.app@mail.de">sortsam.app@mail.de</a>.</p>
+<form id="contact" class="form" action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="41de78e3-775a-423b-929c-ee4b961ad632">
+<input type="hidden" name="subject" value="Sortsam – Contact">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+<label>Name<input type="text" name="name" required maxlength="100" autocomplete="name"></label>
+<label>Email<input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+<label>Message<textarea name="message" required rows="7" maxlength="5000"></textarea></label>
+<p class="muted">Your details are only used to answer your request. See the <a href="privacy.html">privacy policy</a>.</p>
+<button type="submit">Send</button>
+<p id="status" class="status" role="status"></p>
+</form>
+</section>
+
+<footer>© 2026 Sortsam</footer>
+</main>
+<script>
+document.getElementById('contact').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  var form = e.target, status = document.getElementById('status'), button = form.querySelector('button');
+  button.disabled = true; status.textContent = '…';
+  try {
+    var res = await fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
+    var data = await res.json();
+    if (data.success) { form.reset(); status.textContent = 'Thank you! Your message has arrived.'; } else { status.textContent = 'That did not work. Please try again or send an email.'; }
+  } catch (x) { status.textContent = 'That did not work. Please try again or send an email.'; }
+  button.disabled = false;
+});
+</script>
+</body></html>

@@ -14,3 +14,10 @@ h2 { font-size:20px; margin:0 0 8px; }
 .muted, footer { color:var(--muted); font-size:14px; }
 footer { margin-top:32px; }
 .lang { float:right; font-size:14px; }
+
+.form label { display:block; margin:12px 0; font-weight:600; font-size:15px; }
+.form input[type=text], .form input[type=email], .form textarea { display:block; width:100%; margin-top:6px; padding:10px 12px; font:inherit; color:var(--fg); background:var(--bg); border:1px solid var(--muted); border-radius:10px; }
+.form button { font:inherit; font-weight:600; color:#fff; background:var(--accent); border:0; border-radius:10px; padding:10px 22px; cursor:pointer; }
+.form button:disabled { opacity:.6; }
+.form .hp { display:none; }
+.status { min-height:1.5em; }

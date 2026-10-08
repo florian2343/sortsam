@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kontakt – Sortsam</title><link rel="stylesheet" href="style.css"><link rel="icon" href="icon.png"></head>
+<body><main>
+<a class="lang" href="contact.html">English</a>
+<header><img src="icon.png" alt=""><a href="index.html">Sortsam</a></header>
+<nav><a href="index.html">Start</a><a href="datenschutz.html">Datenschutz</a><a href="support.html">Hilfe &amp; Kontakt</a><a href="impressum.html">Impressum</a></nav>
+
+<h1>Kontakt</h1>
+<section>
+<p>Fragen, Fehler, Ideen? Schreib uns hier, oder per E-Mail an <a href="mailto:sortsam.app@mail.de">sortsam.app@mail.de</a>.</p>
+<form id="contact" class="form" action="https://api.web3forms.com/submit" method="POST">
+<input type="hidden" name="access_key" value="41de78e3-775a-423b-929c-ee4b961ad632">
+<input type="hidden" name="subject" value="Sortsam – Kontakt">
+<input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off">
+<label>Name<input type="text" name="name" required maxlength="100" autocomplete="name"></label>
+<label>E-Mail<input type="email" name="email" required maxlength="200" autocomplete="email"></label>
+<label>Nachricht<textarea name="message" required rows="7" maxlength="5000"></textarea></label>
+<p class="muted">Deine Angaben werden nur verwendet, um deine Anfrage zu beantworten. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+<button type="submit">Senden</button>
+<p id="status" class="status" role="status"></p>
+</form>
+</section>
+
+<footer>© 2026 Sortsam</footer>
+</main>
+<script>
+document.getElementById('contact').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  var form = e.target, status = document.getElementById('status'), button = form.querySelector('button');
+  button.disabled = true; status.textContent = '…';
+  try {
+    var res = await fetch(form.action, { method: 'POST', headers: { 'Accept': 'application/json' }, body: new FormData(form) });
+    var data = await res.json();
+    if (data.success) { form.reset(); status.textContent = 'Danke! Deine Nachricht ist angekommen.'; } else { status.textContent = 'Das hat nicht geklappt. Bitte versuch es noch einmal oder schreib eine E-Mail.'; }
+  } catch (x) { status.textContent = 'Das hat nicht geklappt. Bitte versuch es noch einmal oder schreib eine E-Mail.'; }
+  button.disabled = false;
+});
+</script>
+</body></html>
